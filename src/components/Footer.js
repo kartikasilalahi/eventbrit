@@ -66,7 +66,7 @@ const Footer = () => {
                 <img src="https://pngimg.com/uploads/visa/visa_PNG14.png" alt="payment_avaliable" width="80px" />
               </Grid>
             </Grid>
-            <p className="text-center pt-5" >Copyright 	&copy;2020</p>
+            <p className="text-center pt-5" >Copyright 	&copy;2020 Kartika</p>
           </Box>
         </Container>
       </Box>
