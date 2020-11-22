@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import data from './../fakeapi/event'
+import popular from './../fakeapi/popular'
 // style
 const useStyles = makeStyles((theme) => ({
     rootContainer: {
@@ -68,7 +69,7 @@ const UpcomingEvent = () => {
     // usestyle
     const classes = useStyles();
 
-    
+
     // render Events
     const renderEvents = () => {
         return data && data.map((data, index) => {
@@ -128,8 +129,79 @@ const UpcomingEvent = () => {
             )
         })
     }
+
+
+    // render Popular
+    const renderPopular = () => {
+        return popular && popular.map((popular, index) => {
+            return (
+                <Grid item xl={4} lg={4} md={4} sm={6} xs={12} key={index}>
+                    <Link to={`/detailevent/${popular.id}`} style={{ textDecoration: 'none' }}>
+                        <Card className={classes.root}>
+                            <CardActionArea>
+                                <CardMedia
+                                    className={classes.media}
+                                    image={popular.src}
+                                    title={popular.title}
+                                />
+                                <Box>
+                                    <Box className={classes.info}>
+                                        <Box className={classes.boxinfo}>
+                                            <Box className={classes.boxIcon} >
+                                                <Box className={classes.textIcon}>{popular.idr}</Box>
+                                            </Box>
+                                        </Box>
+                                    </Box>
+
+                                    <Box className={classes.infoRight}>
+                                        <Box className={classes.boxinfoRight}>
+                                            <Box className={classes.boxIconRight} >
+                                                <Box className={classes.textIconRight}>
+                                                    <FavoriteIcon style={{ color: 'red' }} />
+                                                </Box>
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                </Box>
+
+                                <CardContent>
+                                    <Grid container>
+                                        <Grid item lg={2}>
+                                            <Box pl={1} pb={1} textAlign="center">
+                                                {popular.date.slice(0, popular.date.length - 5)}
+                                            </Box>
+                                        </Grid>
+                                        <Grid item lg={10} >
+                                            <Box pl={1}>
+                                                <Box fontSize={15} fontWeight="bold" pb={1}>
+                                                    {popular.title}
+                                                </Box>
+                                                <Box fontSize={13} className={classes.address}>
+                                                    {popular.address.split('').filter((val, i) => i <= 80)} ...
+                                            </Box>
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Link>
+                </Grid>
+            )
+        })
+    }
+
     return (
         <React.Fragment>
+            <Container maxWidth="lg" className="rootContainerUpcoming">
+                <Box className="textUpcoming" >Popular Event</Box>
+                <Box pt={4} >
+                    <Grid container spacing={2}>
+                        {renderPopular()}
+                    </Grid>
+                </Box>
+            </Container>
+
             <Container maxWidth="lg" className="rootContainerUpcoming">
                 <Box className="textUpcoming" >Upcoming Event</Box>
                 <Box pt={4} >
